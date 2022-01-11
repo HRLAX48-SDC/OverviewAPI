@@ -1,11 +1,11 @@
-const router = require('express').Router;
+const router = require('express').Router();
 
-const products = require('PATH_TO_PRODUCT_CONTROLLERS');
+const products = require('../controllers/products');
 
 router
-  .get('/', products.MAIN)
-  .get('/:product_id', products.SINGLEINFO)
-  .get('/:product_id/styles', products.STYLES)
-  .get('/:product_id/related', products.RELATED);
+  .get('/', products.fetchList)
+  .get('/:product_id', products.fetchProduct)
+  .get('/:product_id/styles', products.fetchStyles)
+  .get('/:product_id/related', products.fetchRelated);
 
 module.exports = router;
