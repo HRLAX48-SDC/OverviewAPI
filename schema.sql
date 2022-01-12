@@ -71,7 +71,7 @@ CREATE TABLE "skus" (
   "size" VARCHAR(10) NOT NULL DEFAULT NULL,
   "quantity" INTEGER NOT NULL DEFAULT NULL,
   PRIMARY KEY ("id"),
-  FOREIGN KEY (styleid) REFERENCES style(id)
+  FOREIGN KEY (styleid) REFERENCES styles(id)
 );
 
 
@@ -95,3 +95,6 @@ COPY photos FROM '/Users/miles/Desktop/HRImmersive/OverviewAPI/data/photos.csv' 
 COPY features FROM '/Users/miles/Desktop/HRImmersive/OverviewAPI/data/features.csv' delimiter ',' csv header;
 COPY skus FROM '/Users/miles/Desktop/HRImmersive/OverviewAPI/data/skus.csv' delimiter ',' csv header;
 COPY related FROM '/Users/miles/Desktop/HRImmersive/OverviewAPI/data/related.csv' delimiter ',' csv header;
+
+CREATE INDEX skuStyleIndex ON skus(styleid),
+CREATE INDEX photoStyleIndex ON photos(styleid)

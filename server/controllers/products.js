@@ -21,9 +21,13 @@ const products = {
     });
   },
   fetchStyles: (req, res) => {
-    db.retrieveStyles(req.params.product_id).then((data) =>
-      res.status(200).send(data.rows)
-    );
+    db.retrieveStyles(req.params.product_id).then((data) => {
+      let result = {
+        product_id: req.params.product_id,
+        results: data.rows,
+      };
+      res.status(200).send(result);
+    });
   },
   fetchRelated: (req, res) => {},
 };
