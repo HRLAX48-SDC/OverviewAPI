@@ -10,7 +10,12 @@ module.exports = {
     return db.query(queryString, [start, end]);
   },
   retrieveProduct: (id) => {
-    const queryString = `SELECT *, (SELECT json_agg(json_build_object('feature', features.feature, 'value', features.value)) as features FROM features WHERE features.product_id = product.id) FROM product WHERE product.id = $1`;
+    const queryString = `SELECT product.*, features.feature, features.value FROM product LEFT JOIN features ON product.id = features.product_id WHERE product.id = $1`;
+
+    return db.query(queryString, [id]);
+  },
+  retrieveStyles: (id) => {
+    const queryString = `SELECT product.id,`;
 
     return db.query(queryString, [id]);
   },
