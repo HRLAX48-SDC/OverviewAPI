@@ -28,4 +28,16 @@ module.exports = {
 
     return db.query(queryString, [id]);
   },
+
+  retrieveCart: () => {
+    const queryString = 'SELECT product_id FROM cart WHERE active = true';
+
+    return db.query(queryString);
+  },
+
+  updateCart: (id) => {
+    const queryString = ``;
+
+    return db.query(queryString, [id]);
+  },
 };
