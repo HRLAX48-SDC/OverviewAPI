@@ -82,8 +82,7 @@ CREATE TABLE "related" (
 "current_product_id" INTEGER NOT NULL,
 "related_product_id" INTEGER NOT NULL,
 PRIMARY KEY ("id"),
-FOREIGN KEY (current_product_id) REFERENCES product(id),
-FOREIGN KEY (related_product_id) REFERENCES product(id)
+FOREIGN KEY (current_product_id) REFERENCES product(id)
 );
 
 
@@ -96,5 +95,8 @@ COPY features FROM '/Users/miles/Desktop/HRImmersive/OverviewAPI/data/features.c
 COPY skus FROM '/Users/miles/Desktop/HRImmersive/OverviewAPI/data/skus.csv' delimiter ',' csv header;
 COPY related FROM '/Users/miles/Desktop/HRImmersive/OverviewAPI/data/related.csv' delimiter ',' csv header;
 
-CREATE INDEX skuStyleIndex ON skus(styleid),
-CREATE INDEX photoStyleIndex ON photos(styleid)
+CREATE INDEX featureProductIndex ON features(product_id);
+CREATE INDEX styleProductIndex ON styles(productid);
+CREATE INDEX skuStyleIndex ON skus(styleid);
+CREATE INDEX photoStyleIndex ON photos(styleid);
+CREATE INDEX relatedProductIndex ON related(current_product_id);
