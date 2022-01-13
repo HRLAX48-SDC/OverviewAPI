@@ -12,13 +12,13 @@ module.exports = {
   },
 
   retrieveProduct: (id) => {
-    const queryString = `SELECT product.*, (SELECT json_agg(json_build_object('feature', feature, 'value', value)) AS features FROM features WHERE product_id = $1) FROM product WHERE product.id = $1`;
+    const queryString = `SELECT *, (SELECT json_agg(json_build_object('feature', feature, 'value', value)) AS features FROM features WHERE product_id = $1) FROM product WHERE product.id = $1`;
 
     return db.query(queryString, [id]);
   },
 
   retrieveStylesPhotos: (id) => {
-    const queryString = `SELECT styles.id as style_id, styles.name, styles.original_price, styles.sale_price, styles.default_style as "default?", (SELECT jsonb_agg(jsonb_build_object('url', url, 'thumbnail_url', thumbnail_url)) AS photos FROM photos WHERE photos.styleid=styles.id), (SELECT jsonb_object_agg( skus.id, jsonb_build_object('size', skus.size, 'quantity', skus.quantity)) as skus FROM skus WHERE skus.styleid=styles.id) FROM styles WHERE productid = $1`;
+    const queryString = `SELECT styles.id as style_id, styles.name, styles.original_price, styles.sale_price, styles.default_style as "default?", (SELECT json_agg(json_build_object('url', url, 'thumbnail_url', thumbnail_url)) AS photos FROM photos WHERE styleid = styles.id), (SELECT json_object_agg( skus.id, json_build_object('size', skus.size, 'quantity', skus.quantity)) as skus FROM skus WHERE skus.styleid = styles.id) FROM styles WHERE productid = $1`;
 
     return db.query(queryString, [id]);
   },
