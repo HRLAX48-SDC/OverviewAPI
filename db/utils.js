@@ -23,7 +23,7 @@ module.exports = {
   },
 
   retrieveRelated: (id) => {
-    const queryString = `SELECT related_product_id FROM related WHERE current_product_id = $1`;
+    const queryString = `SELECT json_agg(related_product_id) FROM related WHERE current_product_id = $1`;
 
     return db.query(queryString, [id]);
   },
