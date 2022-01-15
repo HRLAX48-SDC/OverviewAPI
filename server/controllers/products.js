@@ -28,7 +28,6 @@ const products = {
   fetchRelated: (req, res) => {
     db.retrieveRelated(req.params.product_id)
       .then((data) => {
-        let result = data.rows.map((num) => num.related_product_id);
         res.status(200).send(data.rows[0].json_agg);
       })
       .catch((err) => res.status(500).send(err));
