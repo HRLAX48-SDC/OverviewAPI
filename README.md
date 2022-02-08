@@ -3,7 +3,10 @@ systemScale was an exercise in gaining exposure to the world of scaling an appli
 
 In systemScale, a PostgreSQL database was paired with an Express server to serve a provided React front end client.
 
-Once a desired throughput was reached on the local machine, it was time to deploy.
+The first step was to build out all of the queries I was going to need, which ultimately led to my discovery of PostgreSQL's aggregation methods. These were key to returning the data in the required format. I toyed with the idea of offloading some of the work from the database and doing some of the data shaping on the server but ultimately went back to doing everything in the query as the t2.micro seemed to become a bottleneck with more demand on it. The server itself was set up fairly quickly as I only needed to build in 4 routes for it.
+
+While everything was still on my local machine, I was testing each endpoint with K6 to document my performance with each change. Eventually, I was able to sustain my desired throughput across all 4 endpoints.
+
 ![image](https://user-images.githubusercontent.com/91905768/153095190-750462f5-5467-4f64-8997-c5d66ef142cc.png)
 
 
